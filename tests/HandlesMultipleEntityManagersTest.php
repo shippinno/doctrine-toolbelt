@@ -112,7 +112,7 @@ class HandlesMultipleEntityManagersTest extends TestCase
 
     public function testItThrowsExceptionIfItFailsToRollback()
     {
-        $this->entityManager2
+        $this->connection2
             ->shouldReceive('commit')
             ->andThrow(new ORMException);
         $this->connection2
