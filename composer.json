@@ -1,6 +1,13 @@
 {
-    "name": "shippinno/doctrine-multi-entity-manager-transaction",
+    "name": "shippinno/doctrine-toolbelt",
     "type": "library",
+    "authors": [
+        {
+            "name": "Hirofumi Tanigami",
+            "email": "hirofumi.tanigami@shippinno.co.jp",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Shippinno\\DoctrineToolbelt\\": "src/"
