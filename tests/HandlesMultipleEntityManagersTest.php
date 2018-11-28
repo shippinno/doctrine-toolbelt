@@ -131,6 +131,13 @@ class HandlesMultipleEntityManagersTest extends TestCase
             $this->entityManager2->shouldHaveReceived('flush');
         }
     }
+
+    public function testItClearsEntityManagers()
+    {
+        $this->handler->clearAllManagers();
+        $this->entityManager1->shouldHaveReceived('clear');
+        $this->entityManager2->shouldHaveReceived('clear');
+    }
 }
 
 class Handler

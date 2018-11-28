@@ -56,6 +56,24 @@ trait HandlesMultipleEntityManagers
 
     /**
      * @param string[] $names
+     */
+    public function clearManagers(array $names): void
+    {
+        foreach ($names as $name) {
+            $this->getEntityManager($name)->clear();
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function clearAllManagers(): void
+    {
+        $this->clearManagers($this->managerRegistry->getManagerNames());
+    }
+
+    /**
+     * @param string[] $names
      * @throws ORMException
      */
     protected function flush(array $names): void
