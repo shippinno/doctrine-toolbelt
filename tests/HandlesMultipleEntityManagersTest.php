@@ -34,7 +34,7 @@ class HandlesMultipleEntityManagersTest extends TestCase
     /** @var Handler|Mock  */
     private $handler;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->connection1 = Mockery::spy(Connection::class);
         $this->connection2 = Mockery::spy(Connection::class);
