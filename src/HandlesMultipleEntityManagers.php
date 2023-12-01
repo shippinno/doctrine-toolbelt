@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace Shippinno\DoctrineToolbelt;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\Mapping\MappingException;
 use Throwable;
 
 trait HandlesMultipleEntityManagers
@@ -27,6 +30,7 @@ trait HandlesMultipleEntityManagers
 
     /**
      * @param string[] $names
+     * @throws Exception
      * @throws RollbackException
      */
     public function flushManagersAtomically(array $names): void
@@ -47,6 +51,8 @@ trait HandlesMultipleEntityManagers
     }
 
     /**
+     * @return void
+     * @throws Exception
      * @throws RollbackException
      */
     public function flushAllManagersAtomically(): void
@@ -56,6 +62,7 @@ trait HandlesMultipleEntityManagers
 
     /**
      * @param string[] $names
+     * @throws MappingException
      */
     public function clearManagers(array $names): void
     {
@@ -66,6 +73,7 @@ trait HandlesMultipleEntityManagers
 
     /**
      * @return void
+     * @throws MappingException
      */
     public function clearAllManagers(): void
     {
@@ -75,6 +83,7 @@ trait HandlesMultipleEntityManagers
     /**
      * @param string[] $names
      * @throws ORMException
+     * @throws OptimisticLockException
      */
     protected function flush(array $names): void
     {
@@ -85,6 +94,7 @@ trait HandlesMultipleEntityManagers
 
     /**
      * @param string[] $names
+     * @throws Exception
      */
     protected function beginTransactions(array $names): void
     {
@@ -95,7 +105,7 @@ trait HandlesMultipleEntityManagers
 
     /**
      * @param string[] $names
-     * @throws ConnectionException
+     * @throws Exception
      */
     protected function commit(array $names): void
     {
@@ -106,7 +116,7 @@ trait HandlesMultipleEntityManagers
 
     /**
      * @param string[] $names
-     * @throws ConnectionException
+     * @throws Exception
      */
     protected function rollback(array $names): void
     {
